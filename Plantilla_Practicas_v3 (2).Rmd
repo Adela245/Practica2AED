@@ -191,4 +191,46 @@ Vemos que los puntos están mas esparcidos. Eso es debido a que esta nueva funci
 ggsave('./results/Ejercicio3.pdf', plot = iris.grafico2.1) 
 ```
 
+# Ejercicio 4
+
+- Carga el fichero Ejercicio4_Data.Rdata. Examina las variables que tiene dicho dataset.
+
+```{r}
+load('./data/Ejercicio4_Data.Rdata')
+
+str(DatosEjer4)
+```
+- Representa un gráfico de puntos, en el que se muestre la fecha en el eje x y las ventas en el eje y. Queremos que los datos de cada fabricante sean de un color distinto. ¿Es este gráfico válido para evaluar la evolución de las ventas de cada fabricante?
+ 
+```{r}
+
+ggplot(DatosEjer4, aes(x= Fecha, y = Ventas, color=Fabricante)) + geom_point()
+
+```
+ Como vemos, este tipo de plot no es muy adecuado si queremos ver la evolución que ha llevado a lo largo de los años. Sería mejor introducir una línea que una los puntos de las siguientes fechas para ver como ha cambiado la venta en ese año (si baja o sube)
+ 
+ - Representa un gráfico como el anterior en el que se muestre la línea que une los puntos que antes has representado.
+ 
+```{r}
+ggplot(DatosEjer4, aes(x= Fecha, y = Ventas, color=Fabricante)) + geom_point() + geom_line()
+```
+ 
+ - Modifica el gráfico anterior para que la tendencia de cada fabricante este trazada con un tipo de línea diferente.
+ 
+```{r}
+grafico_ejer4 <- ggplot(DatosEjer4, aes(x= Fecha, y = Ventas, color=Fabricante)) + geom_point() + geom_line(aes(linetype = Fabricante))
+grafico_ejer4
+```
+ 
+- Añade el siguiente título al gráfico “Ventas mensuales de diferentes compañías tecnológicas”. 
+```{r}
+grafico_ejer4 <- grafico_ejer4 + ggtitle('Ventas mensuales de diferentes compañías tecnológicas')
+grafico_ejer4
+```
+ - Almacena en formato pdf el gráfico resultante en un fichero denominado Ejercicio4.pdf.
+ 
+```{r}
+ggsave('./results/Ejercicio4.pdf', plot = grafico_ejer4 )
+```
+ 
  
